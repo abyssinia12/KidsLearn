@@ -1,0 +1,25 @@
+/* Basic reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif; /* A good, friendly sans-serif font */
+    line-height: 1.6;
+    color: #333;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Global link styles if needed */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Adjusting the scroll behavior for smooth transitions */
+html {
+    scroll-behavior: smooth;
+}
