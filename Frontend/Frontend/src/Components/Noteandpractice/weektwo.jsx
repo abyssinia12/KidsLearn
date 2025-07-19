@@ -1,8 +1,7 @@
-// src/components/NotesSection.jsx
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const slideGroups = {
-  "Welcome to CSS": [
+  "Introduction to CSS": [
     {
       title: "Welcome to CSS!",
       content: (
@@ -34,7 +33,7 @@ const slideGroups = {
       images: [],
     },
   ],
-  "3 Ways to Add CSS": [
+  "Inline and Internal CSS": [
     {
       title: "3 Ways to Add CSS",
       content: (
@@ -121,7 +120,7 @@ const slideGroups = {
       images: [],
     },
   ],
-  "Border in CSS": [
+  "Border and Padding": [
     {
       title: "Borders in CSS",
       content: (
@@ -139,8 +138,6 @@ const slideGroups = {
       ),
       images: [],
     },
-  ],
-  "Padding": [
     {
       title: "Padding (Space Inside a Box)",
       content: (
@@ -158,8 +155,6 @@ const slideGroups = {
       ),
       images: [],
     },
-  ],
-  "Mini Project Code": [
     {
       title: "Let’s Style This Together!",
       content: (
@@ -225,11 +220,11 @@ const slideGroups = {
   ],
 };
 
-export const NotesSection = () => {
+export default function WeekTwoSlides() {
   const groupNames = Object.keys(slideGroups);
-  const [selectedGroup, setSelectedGroup] = useState(groupNames[0]);
-  const slides = slideGroups[selectedGroup];
+  const [selectedGroup, setSelectedGroup] = useState(null); // No topic selected by default
   const [current, setCurrent] = useState(0);
+  const slides = selectedGroup ? slideGroups[selectedGroup] : [];
   const slide = slides[current];
 
   React.useEffect(() => {
@@ -237,21 +232,64 @@ export const NotesSection = () => {
   }, [selectedGroup]);
 
   return (
-    <div style={{ display: 'flex', maxWidth: 900, margin: "40px auto", background: "#e8f5e9", borderRadius: 16, boxShadow: "0 4px 24px #b3c6ff33", fontFamily: 'Comic Sans MS, Comic Sans, cursive', minHeight: 400 }}>
+    <div style={{
+      display: 'flex',
+      maxWidth: 900,
+      margin: "40px auto",
+      background: "#f0f7ff",
+      borderRadius: 16,
+      boxShadow: "0 4px 24px #b3c6ff33",
+      fontFamily: 'Comic Sans MS, Comic Sans, cursive',
+      minHeight: 400,
+    }}>
       {/* Sidebar vertical menu */}
-      <div style={{ minWidth: 220, background: '#e0e7ff', borderTopLeftRadius: 16, borderBottomLeftRadius: 16, padding: '32px 0', display: 'flex', flexDirection: 'column', alignItems: 'stretch', gap: 8, boxShadow: '2px 0 8px #b3c6ff22' }}>
+      <div style={{
+        minWidth: 220,
+        background: '#e0e7ff',
+        borderTopLeftRadius: 16,
+        borderBottomLeftRadius: 16,
+        padding: '32px 0',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'stretch',
+        gap: 8,
+        boxShadow: '2px 0 8px #b3c6ff22',
+      }}>
         {groupNames.map((name) => (
           <button
             key={name}
             onClick={() => setSelectedGroup(name)}
-            style={{ background: selectedGroup === name ? '#6c47ff' : 'transparent', color: selectedGroup === name ? 'white' : '#6c47ff', border: 'none', borderRadius: 8, margin: '0 16px', padding: '14px 10px', fontWeight: 700, fontSize: '1.08rem', cursor: 'pointer', boxShadow: selectedGroup === name ? '0 2px 8px #6c47ff33' : 'none', transition: 'background 0.2s', outline: selectedGroup === name ? '2px solid #6c47ff' : 'none', textAlign: 'left' }}
+            style={{
+              background: selectedGroup === name ? '#6c47ff' : 'transparent',
+              color: selectedGroup === name ? 'white' : '#6c47ff',
+              border: 'none',
+              borderRadius: 8,
+              margin: '0 16px',
+              padding: '14px 10px',
+              fontWeight: 700,
+              fontSize: '1.08rem',
+              cursor: 'pointer',
+              boxShadow: selectedGroup === name ? '0 2px 8px #6c47ff33' : 'none',
+              transition: 'background 0.2s',
+              outline: selectedGroup === name ? '2px solid #6c47ff' : 'none',
+              textAlign: 'left',
+            }}
           >
             {name}
           </button>
         ))}
       </div>
       {/* Main content area */}
-      <div style={{ flex: 1, padding: 32, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: slides.length === 0 ? 'center' : 'flex-start', minHeight: 400, textAlign: 'center' }}>
+      <div style={{
+        flex: 1,
+        padding: 32,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: slides.length === 0 ? 'center' : 'flex-start',
+        minHeight: 400,
+        textAlign: 'center',
+      }}>
         {selectedGroup && slides.length > 0 ? (
           <>
             <h2 style={{ color: "#6c47ff", fontSize: "2rem", marginBottom: 12 }}>{slide.title}</h2>
@@ -268,7 +306,18 @@ export const NotesSection = () => {
                 <button
                   onClick={() => setCurrent((c) => Math.max(0, c - 1))}
                   disabled={current === 0}
-                  style={{ background: current === 0 ? "#ccc" : "#6c47ff", color: "white", border: "none", borderRadius: 8, padding: "10px 24px", fontSize: "1.1rem", cursor: current === 0 ? "not-allowed" : "pointer", fontWeight: 600, boxShadow: "0 2px 8px #0001", transition: "background 0.2s" }}
+                  style={{
+                    background: current === 0 ? "#ccc" : "#6c47ff",
+                    color: "white",
+                    border: "none",
+                    borderRadius: 8,
+                    padding: "10px 24px",
+                    fontSize: "1.1rem",
+                    cursor: current === 0 ? "not-allowed" : "pointer",
+                    fontWeight: 600,
+                    boxShadow: "0 2px 8px #0001",
+                    transition: "background 0.2s",
+                  }}
                 >
                   Prev
                 </button>
@@ -278,7 +327,18 @@ export const NotesSection = () => {
                 <button
                   onClick={() => setCurrent((c) => Math.min(slides.length - 1, c + 1))}
                   disabled={current === slides.length - 1}
-                  style={{ background: current === slides.length - 1 ? "#ccc" : "#6c47ff", color: "white", border: "none", borderRadius: 8, padding: "10px 24px", fontSize: "1.1rem", cursor: current === slides.length - 1 ? "not-allowed" : "pointer", fontWeight: 600, boxShadow: "0 2px 8px #0001", transition: "background 0.2s" }}
+                  style={{
+                    background: current === slides.length - 1 ? "#ccc" : "#6c47ff",
+                    color: "white",
+                    border: "none",
+                    borderRadius: 8,
+                    padding: "10px 24px",
+                    fontSize: "1.1rem",
+                    cursor: current === slides.length - 1 ? "not-allowed" : "pointer",
+                    fontWeight: 600,
+                    boxShadow: "0 2px 8px #0001",
+                    transition: "background 0.2s",
+                  }}
                 >
                   Next
                 </button>
@@ -293,4 +353,4 @@ export const NotesSection = () => {
       </div>
     </div>
   );
-};
+}

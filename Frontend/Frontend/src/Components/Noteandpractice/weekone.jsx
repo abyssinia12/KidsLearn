@@ -5,9 +5,9 @@ import htmlImg from "../../assets/Imageweek1/HTML.jpg";
 import cartoonComputer from "../../assets/Imageweek1/comp.webp";
 import childLaptop from "../../assets/Imageweek1/A child.jpg";
 import colorfulWebpage from "../../assets/Imageweek1/Example of a colorful cartoon webpage.jpg";
-import tagCharacters from "../../assets/Imageweek1/Cutetagcharacters.jpg";
-import headingsLadder from "../../assets/Imageweek1/Stacked headings from H1 to H6 like a ladder.jpg";
-import learningHtmlImg from "../../assets/Imageweek1/learning-HTML.jpg";
+import tagCharacters from "../../assets/Imageweek1/tag_characters.jpg";
+import headingsLadder from "../../assets/Imageweek1/headings_ladder.jpg";
+import learningHtmlImg from "../../assets/Imageweek1/learning_html.jpg";
 import instructionImg from "../../assets/Imageweek1/instruction.webp";
 import webpageImg from "../../assets/Imageweek1/webpage.webp";
 
@@ -420,56 +420,56 @@ export default function WeekOneSlides() {
       }}>
         {selectedGroup && slides.length > 0 ? (
           <>
-      <h2 style={{ color: "#6c47ff", fontSize: "2rem", marginBottom: 12 }}>{slide.title}</h2>
-      <div style={{ marginBottom: 16 }}>{slide.content}</div>
-      {slide.images && slide.images.length > 0 && (
-        <div style={{ display: "flex", justifyContent: "center", gap: 12, flexWrap: "wrap", marginBottom: 16 }}>
-          {slide.images.map((img, i) => (
-            <img key={i} src={img} alt="slide visual" style={{ maxHeight: 120, borderRadius: 8, boxShadow: "0 2px 8px #0001" }} />
-          ))}
-        </div>
-      )}
+            <h2 style={{ color: "#6c47ff", fontSize: "2rem", marginBottom: 12 }}>{slide.title}</h2>
+            <div style={{ marginBottom: 16 }}>{slide.content}</div>
+            {slide.images && slide.images.length > 0 && (
+              <div style={{ display: "flex", justifyContent: "center", gap: 12, flexWrap: "wrap", marginBottom: 16 }}>
+                {slide.images.map((img, i) => (
+                  <img key={i} src={img} alt="slide visual" style={{ maxHeight: 120, borderRadius: 8, boxShadow: "0 2px 8px #0001" }} />
+                ))}
+              </div>
+            )}
             {slides.length > 1 && (
               <div style={{ display: "flex", justifyContent: "space-between", marginTop: 24, width: '100%', maxWidth: 500 }}>
-        <button
-          onClick={() => setCurrent((c) => Math.max(0, c - 1))}
-          disabled={current === 0}
-          style={{
-            background: current === 0 ? "#ccc" : "#6c47ff",
-            color: "white",
-            border: "none",
-            borderRadius: 8,
-            padding: "10px 24px",
-            fontSize: "1.1rem",
-            cursor: current === 0 ? "not-allowed" : "pointer",
-            fontWeight: 600,
-            boxShadow: "0 2px 8px #0001",
-            transition: "background 0.2s",
-          }}
-        >
-          Prev
-        </button>
-        <span style={{ alignSelf: "center", fontSize: "1.1rem", color: "#6c47ff" }}>
-          Slide {current + 1} / {slides.length}
-        </span>
-        <button
-          onClick={() => setCurrent((c) => Math.min(slides.length - 1, c + 1))}
-          disabled={current === slides.length - 1}
-          style={{
-            background: current === slides.length - 1 ? "#ccc" : "#6c47ff",
-            color: "white",
-            border: "none",
-            borderRadius: 8,
-            padding: "10px 24px",
-            fontSize: "1.1rem",
-            cursor: current === slides.length - 1 ? "not-allowed" : "pointer",
-            fontWeight: 600,
-            boxShadow: "0 2px 8px #0001",
-            transition: "background 0.2s",
-          }}
-        >
-          Next
-        </button>
+                <button
+                  onClick={() => setCurrent((c) => Math.max(0, c - 1))}
+                  disabled={current === 0}
+                  style={{
+                    background: current === 0 ? "#ccc" : "#6c47ff",
+                    color: "white",
+                    border: "none",
+                    borderRadius: 8,
+                    padding: "10px 24px",
+                    fontSize: "1.1rem",
+                    cursor: current === 0 ? "not-allowed" : "pointer",
+                    fontWeight: 600,
+                    boxShadow: "0 2px 8px #0001",
+                    transition: "background 0.2s",
+                  }}
+                >
+                  Prev
+                </button>
+                <span style={{ alignSelf: "center", fontSize: "1.1rem", color: "#6c47ff" }}>
+                  Slide {current + 1} / {slides.length}
+                </span>
+                <button
+                  onClick={() => setCurrent((c) => Math.min(slides.length - 1, c + 1))}
+                  disabled={current === slides.length - 1}
+                  style={{
+                    background: current === slides.length - 1 ? "#ccc" : "#6c47ff",
+                    color: "white",
+                    border: "none",
+                    borderRadius: 8,
+                    padding: "10px 24px",
+                    fontSize: "1.1rem",
+                    cursor: current === slides.length - 1 ? "not-allowed" : "pointer",
+                    fontWeight: 600,
+                    boxShadow: "0 2px 8px #0001",
+                    transition: "background 0.2s",
+                  }}
+                >
+                  Next
+                </button>
               </div>
             )}
           </>
@@ -481,4 +481,4 @@ export default function WeekOneSlides() {
       </div>
     </div>
   );
-} 
+}
