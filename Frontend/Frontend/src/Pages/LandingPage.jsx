@@ -1,8 +1,8 @@
 import React from "react";
-import FeaturesGrid from "../sections/FeaturesGrid";
-import HeroSection from "../sections/HeroSection";
-import "./LandingPage.css";
-import Navbar from "../Components/UI/Navbar";
+import FeaturesGrid from "../Sections/FeaturesGrid";
+import HeroSection from "../Sections/HeroSection";
+import "./LandingPage.css"; 
+import Navbar from "../Components/ui/Navbar";
 
 const LandingPage = () => {
   return (
