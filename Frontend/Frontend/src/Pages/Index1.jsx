@@ -13,60 +13,60 @@ export const Index = () => {
       title: "Introduction to Web Development",
       description: "Dive into the world of web development, learn basic concepts and set up your tools.",
       activitiesCount: 1,
-      badgeColor: "hsl(210, 85%, 55%)",
-      cardBg: "hsl(210, 60%, 95%)",
-      cardBorder: "hsl(210, 40%, 85%)",
-      playIconColor: "hsl(210, 85%, 55%)",
+      badgeColor: "#6c47ff",
+      cardBg: "#f0f7ff",
+      cardBorder: "#d1d5fa",
+      playIconColor: "#6c47ff",
     },
     {
       week: 2,
       title: "Styling with CSS",
       description: "Master the art of styling with CSS: selectors, properties, and combining styles.",
       activitiesCount: 1,
-      badgeColor: "hsl(120, 75%, 45%)",
-      cardBg: "hsl(120, 50%, 95%)",
-      cardBorder: "hsl(120, 30%, 85%)",
-      playIconColor: "hsl(120, 75%, 45%)",
+      badgeColor: "#22c55e",
+      cardBg: "#e0ffe7",
+      cardBorder: "#b6f5c8",
+      playIconColor: "#22c55e",
     },
     {
       week: 3,
       title: "Web Page Layout & Structure",
       description: "Learn to arrange elements on a page using div, span, classes, and basic layout techniques.",
       activitiesCount: 1,
-      badgeColor: "hsl(280, 80%, 60%)",
-      cardBg: "hsl(280, 50%, 95%)",
-      cardBorder: "hsl(280, 30%, 85%)",
-      playIconColor: "hsl(280, 80%, 60%)",
+      badgeColor: "#a855f7",
+      cardBg: "#f3e8ff",
+      cardBorder: "#e9d5ff",
+      playIconColor: "#a855f7",
     },
     {
       week: 4,
       title: "Introduction to JavaScript",
       description: "Kickstart your journey into interactive web pages with JavaScript fundamentals.",
       activitiesCount: 1,
-      badgeColor: "hsl(45, 95%, 60%)",
-      cardBg: "hsl(45, 80%, 95%)",
-      cardBorder: "hsl(45, 60%, 85%)",
-      playIconColor: "hsl(45, 95%, 60%)",
+      badgeColor: "#facc15",
+      cardBg: "#fef9c3",
+      cardBorder: "#fde68a",
+      playIconColor: "#facc15",
     },
     {
       week: 5,
       title: "JavaScript & DOM Manipulation",
       description: "Learn to interact with the Document Object Model to dynamically change web content.",
       activitiesCount: 1,
-      badgeColor: "hsl(15, 90%, 55%)",
-      cardBg: "hsl(15, 80%, 95%)",
-      cardBorder: "hsl(15, 60%, 85%)",
-      playIconColor: "hsl(15, 90%, 55%)",
+      badgeColor: "#fb7185",
+      cardBg: "#ffe4e6",
+      cardBorder: "#fbcfe8",
+      playIconColor: "#fb7185",
     },
     {
       week: 6,
       title: "Final Projects",
       description: "Apply everything you've learned to build two exciting final projects.",
       activitiesCount: 2,
-      badgeColor: "hsl(350, 80%, 55%)",
-      cardBg: "hsl(350, 60%, 95%)",
-      cardBorder: "hsl(350, 40%, 85%)",
-      playIconColor: "hsl(350, 80%, 55%)",
+      badgeColor: "#f472b6",
+      cardBg: "#fdf2f8",
+      cardBorder: "#fbcfe8",
+      playIconColor: "#f472b6",
     },
   ];
 
@@ -85,32 +85,36 @@ export const Index = () => {
       return () => clearTimeout(timeoutId);
     }, [index]);
 
-    const defaultShadow = '0 4px 12px rgba(0,0,0,0.05), 0 2px 4px rgba(0,0,0,0.03)';
-    const hoverShadow = '0 8px 20px rgba(0,0,0,0.1), 0 4px 8px rgba(0,0,0,0.06)';
+    const defaultShadow = '0 4px 16px rgba(108,71,255,0.07), 0 2px 4px rgba(0,0,0,0.03)';
+    const hoverShadow = '0 8px 32px rgba(108,71,255,0.13), 0 4px 8px rgba(0,0,0,0.08)';
 
     const baseItemStyle = {
       backgroundColor: weekItem.cardBg,
-      borderWidth: '1px',
+      borderWidth: '2px',
       borderStyle: 'solid',
       borderColor: weekItem.cardBorder,
-      transition: 'all 0.3s ease-out',
-      borderRadius: '0.75rem',
+      transition: 'all 0.3s cubic-bezier(.4,2,.3,1)',
+      borderRadius: '1.25rem',
       boxShadow: defaultShadow,
       cursor: 'pointer',
       display: 'flex',
+      flexDirection: 'column',
       justifyContent: 'space-between',
-      alignItems: 'center',
-      padding: '1.5rem 2rem',
+      alignItems: 'flex-start',
+      padding: '2.2rem 2.2rem 1.6rem 2.2rem',
       outline: 'none',
       opacity: isVisible ? 1 : 0,
-      transform: isVisible ? 'translateY(0)' : 'translateY(15px)',
+      transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
+      minHeight: 220,
+      position: 'relative',
     };
 
     const hoverItemStyle = {
-      transform: isVisible ? 'translateY(-0.4rem)' : 'translateY(15px)',
+      transform: isVisible ? 'translateY(-0.5rem) scale(1.03)' : 'translateY(20px)',
       boxShadow: hoverShadow,
       borderColor: weekItem.playIconColor,
-      borderWidth: '2px',
+      borderWidth: '2.5px',
+      zIndex: 2,
     };
 
     const currentItemStyle = {
@@ -120,11 +124,14 @@ export const Index = () => {
 
     const badgeCommonStyle = {
       color: 'white',
-      padding: '0.4rem 1rem',
+      padding: '0.5rem 1.2rem',
       borderRadius: '9999px',
-      fontSize: '0.8rem',
-      fontWeight: '600',
-      boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
+      fontSize: '1.1rem',
+      fontWeight: '700',
+      boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
+      letterSpacing: '0.01em',
+      marginBottom: '0.7rem',
+      background: `linear-gradient(90deg, ${weekItem.badgeColor} 60%, #fff0 100%)`,
     };
 
     return (
@@ -136,42 +143,37 @@ export const Index = () => {
         role="link"
         tabIndex="0"
       >
-        <div style={{ display: 'flex', flexDirection: 'column', flex: '1', minWidth: '0' }}>
-          <div style={{ display: 'flex', alignItems: 'center', marginBottom: '0.8rem', flexWrap: 'wrap', gap: '0.6rem' }}>
-            <Badge
-              style={{
-                ...badgeCommonStyle,
-                backgroundColor: weekItem.badgeColor,
-                lineHeight: '1.2',
-              }}
-            >
+        <div style={{ display: 'flex', flexDirection: 'column', flex: '1', minWidth: '0', width: '100%' }}>
+          <Badge style={badgeCommonStyle}>
               Week {weekItem.week}
             </Badge>
             <CardTitle
               style={{
-                fontSize: '1.35rem',
-                fontWeight: '700',
-                color: 'hsl(210, 10%, 20%)',
-                margin: '0',
-                lineHeight: '1.3',
+              fontSize: '1.7rem',
+              fontWeight: '800',
+              color: weekItem.playIconColor,
+              margin: '0 0 0.5rem 0',
+              lineHeight: '1.2',
+              letterSpacing: '-0.01em',
+              textShadow: '0 1px 2px #fff8',
               }}
             >
               {weekItem.title}
             </CardTitle>
-          </div>
           <CardDescription
             style={{
-              fontSize: '0.95rem',
-              color: 'hsl(210, 10%, 40%)',
-              marginBottom: '1rem',
-              lineHeight: '1.5',
+              fontSize: '1.08rem',
+              color: '#444',
+              marginBottom: '1.2rem',
+              lineHeight: '1.6',
+              fontWeight: 500,
             }}
           >
             {weekItem.description}
           </CardDescription>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', color: 'hsl(210, 10%, 35%)', fontWeight: '600' }}>
-            <Play style={{ width: '1.2rem', height: '1.2rem', color: weekItem.playIconColor }} />
-            <span style={{ fontSize: '0.95rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.7rem', color: weekItem.playIconColor, fontWeight: '700', fontSize: '1.08rem', marginTop: 'auto' }}>
+            <Play style={{ width: '1.3rem', height: '1.3rem', color: weekItem.playIconColor }} />
+            <span>
               {weekItem.activitiesCount} Activit{weekItem.activitiesCount > 1 ? "ies" : "y"}
             </span>
           </div>
@@ -183,32 +185,37 @@ export const Index = () => {
   return (
     <div
       style={{
-        maxWidth: '960px',
+        maxWidth: '1200px',
         margin: '0 auto',
         padding: '5rem 2rem',
-        backgroundColor: 'hsl(30, 80%, 97%)',
+        background: 'linear-gradient(135deg, #f0f7ff 0%, #fdf2f8 100%)',
         minHeight: '100vh',
         fontFamily:
-          'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
-        color: 'hsl(210, 10%, 20%)',
+          'Comic Sans MS, Comic Sans, cursive, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+        color: '#222',
       }}
     >
       <h1
         style={{
-          fontSize: '3.2rem',
+          fontSize: '3.5rem',
           fontWeight: '900',
           textAlign: 'center',
-          color: 'hsl(210, 10%, 18%)',
-          textShadow: '1px 1px 2px rgba(0,0,0,0.05)',
+          color: '#6c47ff',
+          textShadow: '1px 2px 8px #b3c6ff44',
           marginBottom: '4rem',
-          lineHeight: '1.2',
-          letterSpacing: '-0.02em',
+          lineHeight: '1.1',
+          letterSpacing: '-0.03em',
         }}
       >
-        KidsLearn Web Development Course
+        <span role="img" aria-label="sparkle">✨</span> KidsLearn Web Development Course <span role="img" aria-label="sparkle">✨</span>
       </h1>
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+        gap: '2.2rem',
+        alignItems: 'stretch',
+      }}>
         {weeks.map((weekItem, index) => (
           <ListItemCard
             key={weekItem.week}

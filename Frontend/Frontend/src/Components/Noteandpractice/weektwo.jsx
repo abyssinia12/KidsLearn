@@ -1,17 +1,26 @@
 import React, { useState } from "react";
+import cssImg from "../../assets/week2images/css.webp";
+import csstypeImg from "../../assets/week3image/csstype.jpg";
 
 const slideGroups = {
   "Introduction to CSS": [
     {
       title: "Welcome to CSS!",
       content: (
-        <div style={{ fontSize: "1.15rem", textAlign: "left", maxWidth: 500, margin: "0 auto" }}>
+        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', background: '#fffbe7', borderRadius: 12, padding: '20px 16px', marginBottom: 16, boxShadow: '0 2px 8px #ffe06655', fontSize: '1.15rem', color: '#4b3f1d', maxWidth: 600, margin: '0 auto 16px auto', minHeight: 180 }}>
+          <div style={{ flex: 2, textAlign: 'left' }}>
           <b>CSS</b> stands for <b>Cascading Style Sheets</b><br /><br />
           It helps us make our webpage look <span style={{ color: '#6c47ff', fontWeight: 600 }}>beautiful</span>!<br /><br />
           With CSS, we can change <b>colors</b>, <b>fonts</b>, <b>sizes</b>, and more!
           <div style={{ marginTop: 16, fontStyle: 'italic', color: '#888' }}>
             {/* Image: A dull page turning into a colorful, styled page. Smiling paintbrush or crayon drawing a web page. */}
           </div>
+          </div>
+          <img
+            src={cssImg}
+            alt="CSS Illustration"
+            style={{ flex: 1, maxWidth: 180, minWidth: 120, maxHeight: 160, borderRadius: 10, boxShadow: '0 2px 8px #0001', marginLeft: 18, objectFit: 'contain', background: '#fff', padding: 6 }}
+          />
         </div>
       ),
       images: [],
@@ -84,6 +93,22 @@ const slideGroups = {
         </div>
       ),
       images: [],
+    },
+    {
+      title: "CSS Property Types",
+      content: (
+        <div style={{ fontSize: "1.13rem", textAlign: "center", maxWidth: 600, margin: "0 auto" }}>
+          <div style={{ marginBottom: 16 }}>
+            Here are some common CSS property types you can use to style your web pages!
+          </div>
+          <img
+            src={csstypeImg}
+            alt="CSS Property Types"
+            style={{ maxWidth: 400, width: '100%', borderRadius: 12, boxShadow: '0 2px 8px #b3c6ff33', margin: '0 auto' }}
+          />
+        </div>
+      ),
+      images: [csstypeImg],
     },
   ],
   "Styling Text": [

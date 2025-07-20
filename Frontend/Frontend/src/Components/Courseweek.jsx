@@ -9,7 +9,11 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "../Components/ui/Tabs"
 import { ArrowLeft, Play, BookOpen, Code, CheckCircle, Star, Link as LinkIcon, Activity as ActivityIcon } from "lucide-react";
 import { VideoPlayer } from "../Components/videoplayer";
 import { NotesSection } from "../Components/Notessection"; // Assuming NotesSection component correctly handles its content
-import WeekOneSlides from '../Components/Note_and_practice/weekone';
+import WeekOneSlides from '../Components/Noteandpractice/weekone';
+import WeekTwoSlides from '../Components/Noteandpractice/weektwo';
+import WeekThreeSlides from '../Components/Noteandpractice/weekthree';
+import WeekFourSlides from '../Components/Noteandpractice/weekfour';
+import WeekFiveSlides from '../Components/Noteandpractice/weekfive';
 
 import  {PersonalCardActivity } from './activities/PersonalCardActivity';
 import { CustomizedPersonalCardActivity } from '../Components/activities/customizedPersonalcard';
@@ -194,6 +198,14 @@ export  const CourseWeek = ({ week, onBack, onComplete, isCompleted }) => {
             </p>
             {week.week === 1 ? (
               <WeekOneSlides />
+            ) : week.week === 2 ? (
+              <WeekTwoSlides />
+            ) : week.week === 3 ? (
+              <WeekThreeSlides />
+            ) : week.week === 4 ? (
+              <WeekFourSlides />
+            ) : week.week === 5 ? (
+              <WeekFiveSlides />
             ) : (
               <NotesSection week={week} />
             )}

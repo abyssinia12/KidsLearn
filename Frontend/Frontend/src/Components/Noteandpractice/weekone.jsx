@@ -5,9 +5,9 @@ import htmlImg from "../../assets/Imageweek1/HTML.jpg";
 import cartoonComputer from "../../assets/Imageweek1/comp.webp";
 import childLaptop from "../../assets/Imageweek1/A child.jpg";
 import colorfulWebpage from "../../assets/Imageweek1/Example of a colorful cartoon webpage.jpg";
-import tagCharacters from "../../assets/Imageweek1/tag_characters.jpg";
-import headingsLadder from "../../assets/Imageweek1/headings_ladder.jpg";
-import learningHtmlImg from "../../assets/Imageweek1/learning_html.jpg";
+import tagCharacters from "../../assets/Imageweek1/Cutetagcharacters.jpg";
+import headingsLadder from "../../assets/Imageweek1/Stacked headings from H1 to H6 like a ladder.jpg";
+import learningHtmlImg from "../../assets/Imageweek1/learning-HTML.jpg";
 import instructionImg from "../../assets/Imageweek1/instruction.webp";
 import webpageImg from "../../assets/Imageweek1/webpage.webp";
 
