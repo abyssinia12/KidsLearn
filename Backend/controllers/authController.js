@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const supabase = require("../supabase");
+const nodemailer = require("nodemailer");
 
 const JWT_SECRET =
   "YlMvaOm8ssZ/7UoPGnXyy0PSxD+l6TEEE5PMWr+52vVviWno5WPSo4Mg0+rZEyR0w2oRaiv68D6IhZEoUUNqXA==";
@@ -26,6 +27,25 @@ exports.registerUser = async (req, res) => {
 
   if (error) {
     return res.status(500).json({ message: "Error registering user" });
+  }
+
+  // Send welcome email
+  try {
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS,
+      },
+    });
+    await transporter.sendMail({
+      from: `KidsLearn <${process.env.SMTP_USER}>`,
+      to: email,
+      subject: "Welcome to KidsLearn!",
+      text: `Welcome to KidsLearn!\n\nThank you for signing up. We're excited to have you join our web development adventure!\n\nHappy learning!\nThe KidsLearn Team`,
+    });
+  } catch (e) {
+    console.error("Failed to send welcome email:", e);
   }
 
   // Return the role in the response
@@ -64,4 +84,35 @@ exports.getProfile = async (req, res) => {
     return res.status(404).json({ message: "User not found." });
   }
   res.json(user);
+};
+
+exports.approveStudent = async (req, res) => {
+  // Only allow admins
+  if (!req.user || req.user.role !== "admin") {
+    return res.status(403).json({ message: "Forbidden: Admins only." });
+  }
+  const { email } = req.body;
+  if (!email) {
+    return res.status(400).json({ message: "Email is required." });
+  }
+  // Update the user's status to 'active'
+  const { error } = await supabase
+    .from("users")
+    .update({ status: "active" })
+    .eq("email", email);
+  if (error) {
+    return res.status(500).json({ message: "Failed to approve student." });
+  }
+  res.json({ message: "Student approved successfully." });
+};
+
+exports.getAllUsers = async (req, res) => {
+  if (!req.user || req.user.role !== "admin") {
+    return res.status(403).json({ message: "Forbidden: Admins only." });
+  }
+  const { data, error } = await supabase.from("users").select("*");
+  if (error) {
+    return res.status(500).json({ message: "Failed to fetch users." });
+  }
+  res.json(data);
 };
