@@ -1,11 +1,63 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "../Common/Button";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import { createClient } from "@supabase/supabase-js";
 import "./Navbar.css";
 
-const Navbar = () => {
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const supabaseKey = import.meta.env.VITE_SUPABASE_KEY;
+const supabase = createClient(supabaseUrl, supabaseKey);
+
+const Navbar = ({ minimal }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const session = supabase.auth.getSession().then(({ data }) => {
+      setIsLoggedIn(!!data.session);
+    });
+    const { data: listener } = supabase.auth.onAuthStateChange(
+      (_event, session) => {
+        setIsLoggedIn(!!session);
+      }
+    );
+    return () => {
+      listener.subscription.unsubscribe();
+    };
+  }, []);
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    localStorage.removeItem("token");
+    localStorage.removeItem("role");
+    setIsLoggedIn(false);
+    navigate("/");
+  };
+
+  if (minimal) {
+    return (
+      <nav className="navbar">
+        <div className="navbar-container">
+          <div className="navbar-flex">
+            <div className="navbar-logo-group">
+              <div className="navbar-logo-bg">
+                <span className="navbar-logo-text">K</span>
+              </div>
+              <span className="navbar-title">KidsLearn</span>
+            </div>
+            <div className="navbar-buttons">
+              {isLoggedIn && (
+                <Button className="navbar-signin-btn" onClick={handleLogout}>
+                  Logout
+                </Button>
+              )}
+            </div>
+          </div>
+        </div>
+      </nav>
+    );
+  }
 
   // Function to handle smooth scrolling for anchor links
   const handleNavLinkClick = (e, targetId) => {
@@ -36,46 +88,52 @@ const Navbar = () => {
 
           {/* Desktop Navigation */}
           <div className="navbar-links">
-            <a
-              href="#home"
-              onClick={(e) => handleNavLinkClick(e, "home")}
-              className="navbar-link"
-            >
+            <Link to="/" className="navbar-link">
               Home
               <span className="navbar-link-underline"></span>
-            </a>
+            </Link>
             <a
               href="#features"
-              onClick={(e) => handleNavLinkClick(e, "features")}
+              onClick={(e) => {
+                e.preventDefault();
+                setIsMenuOpen(false);
+                const targetElement = document.getElementById("features");
+                if (targetElement) {
+                  targetElement.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start",
+                  });
+                }
+              }}
               className="navbar-link"
             >
               Features
               <span className="navbar-link-underline"></span>
             </a>
-            <a
-              href="#pricing"
-              onClick={(e) => handleNavLinkClick(e, "pricing")}
-              className="navbar-link"
-            >
+            <Link to="/pricing" className="navbar-link">
               Pricing
               <span className="navbar-link-underline"></span>
-            </a>
-            <a
-              href="#contact"
-              onClick={(e) => handleNavLinkClick(e, "contact")}
-              className="navbar-link"
-            >
+            </Link>
+            <Link to="/contact" className="navbar-link">
               Contact
               <span className="navbar-link-underline"></span>
-            </a>
+            </Link>
           </div>
 
           {/* Desktop Buttons */}
           <div className="navbar-buttons">
-            <Button className="navbar-signin-btn" onClick={handleLoginClick}>
-              Sign In
-            </Button>
-            <Button className="navbar-getstarted-btn">Get Started</Button>
+            {isLoggedIn ? (
+              <Button className="navbar-signin-btn" onClick={handleLogout}>
+                Logout
+              </Button>
+            ) : (
+              <Button
+                className="navbar-signin-btn"
+                onClick={() => navigate("/login")}
+              >
+                Sign In
+              </Button>
+            )}
           </div>
 
           {/* Mobile menu button */}
@@ -114,44 +172,48 @@ const Navbar = () => {
         {isMenuOpen && (
           <div className="navbar-mobile-nav">
             <div className="navbar-mobile-links">
-              <a
-                href="#home"
-                onClick={(e) => handleNavLinkClick(e, "home")}
-                className="navbar-mobile-link"
-              >
+              <Link to="/" className="navbar-mobile-link">
                 Home
-              </a>
+              </Link>
               <a
                 href="#features"
-                onClick={(e) => handleNavLinkClick(e, "features")}
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIsMenuOpen(false);
+                  const targetElement = document.getElementById("features");
+                  if (targetElement) {
+                    targetElement.scrollIntoView({
+                      behavior: "smooth",
+                      block: "start",
+                    });
+                  }
+                }}
                 className="navbar-mobile-link"
               >
                 Features
               </a>
-              <a
-                href="#pricing"
-                onClick={(e) => handleNavLinkClick(e, "pricing")}
-                className="navbar-mobile-link"
-              >
+              <Link to="/pricing" className="navbar-mobile-link">
                 Pricing
-              </a>
-              <a
-                href="#contact"
-                onClick={(e) => handleNavLinkClick(e, "contact")}
-                className="navbar-mobile-link"
-              >
+              </Link>
+              <Link to="/contact" className="navbar-mobile-link">
                 Contact
-              </a>
+              </Link>
               <div className="navbar-mobile-btns">
-                <Button
-                  className="navbar-mobile-signin-btn"
-                  onClick={handleLoginClick}
-                >
-                  Sign In
-                </Button>
-                <Button className="navbar-mobile-getstarted-btn">
-                  Get Started
-                </Button>
+                {isLoggedIn ? (
+                  <Button
+                    className="navbar-mobile-signin-btn"
+                    onClick={handleLogout}
+                  >
+                    Logout
+                  </Button>
+                ) : (
+                  <Button
+                    className="navbar-mobile-signin-btn"
+                    onClick={() => navigate("/login")}
+                  >
+                    Sign In
+                  </Button>
+                )}
               </div>
             </div>
           </div>

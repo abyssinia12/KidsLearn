@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { createClient } from "@supabase/supabase-js";
 
 // TODO: Replace with your actual Supabase project credentials
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseKey = import.meta.env.VITE_SUPABASE_KEY;
-const supabase = createClient(supabaseUrl, supabaseKey);
-console.log("Supabase URL:", supabaseUrl);
-console.log("Supabase Key:", supabaseKey);
 
 const UserList = () => {
   const [users, setUsers] = useState([]);
@@ -17,11 +13,20 @@ const UserList = () => {
     const fetchUsers = async () => {
       setLoading(true);
       setError(null);
-      const { data, error } = await supabase.from("users").select("*");
-      if (error) {
-        setError(error.message);
-      } else {
+      try {
+        const token = localStorage.getItem("token");
+        const res = await fetch("http://localhost:5000/api/auth/users", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        if (!res.ok) {
+          throw new Error("Failed to fetch users");
+        }
+        const data = await res.json();
         setUsers(data);
+      } catch (err) {
+        setError(err.message);
       }
       setLoading(false);
     };
@@ -118,6 +123,26 @@ const UserList = () => {
                 >
                   Role
                 </th>
+                <th
+                  style={{
+                    color: "#fff",
+                    padding: "14px 10px",
+                    fontWeight: 600,
+                    letterSpacing: 0.5,
+                  }}
+                >
+                  Status
+                </th>
+                <th
+                  style={{
+                    color: "#fff",
+                    padding: "14px 10px",
+                    fontWeight: 600,
+                    letterSpacing: 0.5,
+                  }}
+                >
+                  Actions
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -164,6 +189,68 @@ const UserList = () => {
                     }}
                   >
                     {user.role}
+                  </td>
+                  <td
+                    style={{
+                      padding: "12px 10px",
+                      borderBottom: "1px solid #e5e7eb",
+                      textTransform: "capitalize",
+                    }}
+                  >
+                    {user.status || "pending"}
+                  </td>
+                  <td
+                    style={{
+                      padding: "12px 10px",
+                      borderBottom: "1px solid #e5e7eb",
+                    }}
+                  >
+                    {user.role === "student" && user.status !== "active" ? (
+                      <button
+                        style={{
+                          background: "#22c55e",
+                          color: "#fff",
+                          border: "none",
+                          borderRadius: 6,
+                          padding: "6px 16px",
+                          fontWeight: 600,
+                          cursor: "pointer",
+                        }}
+                        onClick={async () => {
+                          try {
+                            const token = localStorage.getItem("token");
+                            const res = await fetch(
+                              "http://localhost:5000/api/auth/approve-student",
+                              {
+                                method: "POST",
+                                headers: {
+                                  "Content-Type": "application/json",
+                                  Authorization: `Bearer ${token}`,
+                                },
+                                body: JSON.stringify({ email: user.email }),
+                              }
+                            );
+                            if (res.ok) {
+                              setUsers((prev) =>
+                                prev.map((u) =>
+                                  u.id === user.id
+                                    ? { ...u, status: "active" }
+                                    : u
+                                )
+                              );
+                            } else {
+                              alert("Failed to approve student.");
+                            }
+                          } catch (err) {
+                            alert("Error approving student.");
+                          }
+                        }}
+                      >
+                        Approve
+                      </button>
+                    ) : (
+                      <span style={{ color: "#aaa" }}>-</span>
+                    )}
                   </td>
                 </tr>
               ))}
