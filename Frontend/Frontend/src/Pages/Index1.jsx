@@ -25,6 +25,7 @@ export const Index = () => {
       cardBg: "#f0f7ff",
       cardBorder: "#d1d5fa",
       playIconColor: "#6c47ff",
+      youtubeLink: "https://youtu.be/d9zz0yU2xWE",
     },
     {
       week: 2,

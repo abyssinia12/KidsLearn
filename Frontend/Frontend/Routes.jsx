@@ -14,6 +14,7 @@ import { CourseWeek } from "./src/Components/Courseweek";
 import RegisterPage from "./src/Pages/RegisterPage";
 import ContactPage from "./src/Pages/ContactPage";
 import PricingPage from "./src/Pages/PricingPage";
+import ResetPasswordPage from "./src/Pages/ResetPasswordPage";
 
 // Week data (should match Index1.jsx)
 const weeks = [
@@ -27,6 +28,7 @@ const weeks = [
     cardBg: "hsl(210, 60%, 95%)",
     cardBorder: "hsl(210, 40%, 85%)",
     playIconColor: "hsl(210, 85%, 55%)",
+    youtubeLink: "https://youtu.be/d9zz0yU2xWE",
     topics: [
       "How to Install & Use SPCK Editor",
       "Introduction to Computers & Programming",
@@ -135,6 +137,7 @@ export default function Routering() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="/reset-password" element={<ResetPasswordPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/pricing" element={<PricingPage />} />
         <Route path="/admin-dashboard" element={<AdminDashboard />} />

@@ -741,7 +741,7 @@ export const CourseWeek = ({ week, onBack, onComplete, isCompleted }) => {
         </TabsContent>
 
         <TabsContent value="video">
-          <VideoPlayer week={week.week} />
+          <VideoPlayer week={week.week} weekData={week} />
         </TabsContent>
 
         <TabsContent value="notes">

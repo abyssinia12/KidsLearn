@@ -86,14 +86,14 @@ const ContactPage = () => (
             <span style={iconStyle}>📞</span>
             <div style={{ textAlign: "left" }}>
               <a
-                href="tel:0978971996"
+                href="tel:0984180404"
                 style={{
                   color: "#2563eb",
                   fontWeight: 600,
                   textDecoration: "none",
                 }}
               >
-                097 897 1996
+                098 418 0404
               </a>
               <br />
               <a
